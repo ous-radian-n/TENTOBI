@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - Kill Trap
+  - Damage Trap
+  - GroundChecker
+  - StagePointDirector
+  - UI
+  - TransitionDirector
+  - Controlable Object
+  - SaveDataSelecter
+  - MainMenuController
   layers:
   - Default
   - TransparentFX

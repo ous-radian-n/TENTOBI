@@ -5,10 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Title.unity
+  - enabled: 1
+    path: Assets/TENTOBI Original/Scenes/Title.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/TestSatge.unity
-    guid: a24e5d9da24e5ef41b80c127f4e7d786
+    path: Assets/TENTOBI Original/Scenes/Menu/MainMenu.unity
+    guid: 949fa38ccef947b41818b8ace8a315bd
+  - enabled: 1
+    path: Assets/TENTOBI Original/Scenes/Tutorials/Tutorial1.unity
+    guid: e5e7a7619d7bf824d8a41ff2f1186dba
+  - enabled: 1
+    path: Assets/TENTOBI Original/Scenes/Stages/Stage1.unity
+    guid: fd068958fa96d9d4c96b01280f2c3bc5
   m_configObjects: {}
