@@ -58,7 +58,7 @@ public class StagePointDirector : MonoBehaviour
         {
             player.transform.position = point[p].transform.position;
             player.transform.rotation = point[p].transform.rotation;
-            player.GetComponent<Rigidbody2D>().velocity
+            player.GetComponent<Rigidbody2D>().linearVelocity
                 = player.GetComponent<GravityController>().velocity = Vector2.zero;
             player.GetComponent<Rigidbody2D>().angularVelocity
                 = player.GetComponent<GravityController>().angularVelocity = 0.0f;
@@ -78,7 +78,7 @@ public class StagePointDirector : MonoBehaviour
             {
                 movingObject[i].transform.position = movingObject_defaultPoint[i].transform.position;
                 movingObject[i].transform.rotation = movingObject_defaultPoint[i].transform.rotation;
-                movingObject[i].GetComponent<Rigidbody2D>().velocity
+                movingObject[i].GetComponent<Rigidbody2D>().linearVelocity
                     = movingObject[i].GetComponent<GravityController>().velocity = Vector2.zero;
                 movingObject[i].GetComponent<Rigidbody2D>().angularVelocity
                     = movingObject[i].GetComponent<GravityController>().angularVelocity = 0.0f;
