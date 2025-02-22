@@ -91,7 +91,7 @@ public class GravityController : MonoBehaviour
             if (isPausing)
             {
                 // 時間の進行を再開する（＝別変数で確保された速度をこのオブジェクトの速度に再付加する）
-                rigitbody.velocity = this.velocity;
+                rigitbody.linearVelocity = this.velocity;
                 rigitbody.angularVelocity = this.angularVelocity;
 
                 isPausing = false;
@@ -103,9 +103,9 @@ public class GravityController : MonoBehaviour
         else if (!isPausing)
         {
             // いったん時間を止める（＝このオブジェクトの速度を別変数で確保し0にする）
-            this.velocity = rigitbody.velocity;
+            this.velocity = rigitbody.linearVelocity;
             this.angularVelocity = rigitbody.angularVelocity;
-            rigitbody.velocity = Vector2.zero;
+            rigitbody.linearVelocity = Vector2.zero;
             rigitbody.angularVelocity = 0.0f;
 
             isPausing = true;
@@ -139,7 +139,7 @@ public class GravityController : MonoBehaviour
         Vector2 addGravity = new Vector2(Mathf.Sin(angle), -Mathf.Cos(angle)).normalized * gravity;
         // 重力ベクトルに垂直な単位ベクトルと速度の単位ベクトルから抵抗ベクトルを算出
         Vector2 addDrag = new Vector2(-Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
-        float dot = Vector2.Dot(addDrag, rigitbody.velocity.normalized); // 内積で印加方向と印加率を計算
+        float dot = Vector2.Dot(addDrag, rigitbody.linearVelocity.normalized); // 内積で印加方向と印加率を計算
         addDrag *= dot * drag;
         // 重力と抵抗を合算（この際ベクトルdirは印加用変数として再利用）
         dir = addGravity - addDrag;

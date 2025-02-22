@@ -110,12 +110,12 @@ public class ObjectController : MonoBehaviour, IPointerClickHandler
                         if (diff.y > collisionThreshold && input.y > 0.0f) input.y = 0.0f;
                         else if (diff.y < -collisionThreshold && input.y < 0.0f) input.y = 0.0f;
                     }
-                    rigitbody.velocity = input;
+                    rigitbody.linearVelocity = input;
                     ctrlCost = input.magnitude / controlSpeed * costCPPerInput;
                 }
                 else
                 {
-                    rigitbody.velocity = Vector2.zero;
+                    rigitbody.linearVelocity = Vector2.zero;
                     ctrlCost = 0.0f;
                 }
                 rigitbody.angularVelocity = 0.0f;
