@@ -353,18 +353,27 @@ public class GameDirector : MonoBehaviour
 	/// </summary>
 	private void UpdateStageProgress()
 	{
-		if (!isTutorial)
-		{ // チュートリアルではない場合に限定
-			int progress = SaveLoadFile.instance.savedata.stageProgressNum;
-			var stageNumProgress = MainMenuDirector.main.stageViewList[progress];
-			int oldScorePerStage = SaveLoadFile.instance.savedata.scorePerSatge[stageNum];
-			// ステージ進捗を更新した場合
-			if (stageNumProgress.stageNum <= stageNum)
+		int progress = SaveLoadFile.instance.savedata.stageProgressNum;
+		var stageNumProgress = MainMenuDirector.main.stageViewList[progress];
+		int oldScorePerStage = SaveLoadFile.instance.savedata.scorePerSatge[stageNum];
+		// ステージ進捗を更新した場合
+		if (stageNumProgress.stageNum <= stageNum)
+		{
+			// ステージ進捗を更新
+			SaveLoadFile.instance.savedata.stageProgressNum += 1;
+			// ハイスコアを更新（チュートリアルでない場合）
+			if (!isTutorial)
 			{
-				// ステージ進捗を更新
-				SaveLoadFile.instance.savedata.stageProgressNum += 1;
+				SaveLoadFile.instance.savedata.scorePerSatge[stageNum] = scoreInStage;
+				SaveLoadFile.instance.UpdateGottenScore();
 			}
-			// ハイスコアを更新
+			// セーブデータを保存
+			SaveLoadFile.instance.SaveDataToFile();
+		}
+		// ステージ進捗は更新していないがチュートリアルではなくかつステージのハイスコアを更新した場合
+		else if (!isTutorial && scoreInStage > oldScorePerStage)
+		{
+			// ハイスコアのみ更新
 			SaveLoadFile.instance.savedata.scorePerSatge[stageNum] = scoreInStage;
 			SaveLoadFile.instance.UpdateGottenScore();
 			SaveLoadFile.instance.SaveDataToFile();
