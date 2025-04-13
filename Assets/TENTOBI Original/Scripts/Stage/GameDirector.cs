@@ -17,7 +17,7 @@ public class GameDirector : MonoBehaviour
 	/// プレイヤーのSpriteRendererコンポーネント
 	/// アニメーションなどに使用します
 	/// </summary>
-	private SpriteRenderer playerRend;
+	private MeshRenderer playerRend;
 
 	/// <summary>
 	/// StagePointDirecotr(ステージ中継ポイント処理)コンポーネント
@@ -155,7 +155,7 @@ public class GameDirector : MonoBehaviour
 	{
 		if (isTutorial) life_max = 99;
 		playerDir = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerDirector>();
-		playerRend = GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>();
+		playerRend = GameObject.FindGameObjectWithTag("PlayerRending").GetComponent<MeshRenderer>();
 		stage = GameObject.FindGameObjectWithTag("StagePointDirector").GetComponent<StagePointDirector>();
 		ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UIDirector>();
 		transition = GameObject.FindGameObjectWithTag("TransitionDirector").GetComponent<TransitionDirector>();
@@ -195,9 +195,9 @@ public class GameDirector : MonoBehaviour
 					{
 						// 死亡アニメーション
 						t += Time.deltaTime;
-						if (t < 1.0f) playerRend.color = new Color(1.0f, 1.0f - t, 1.0f - t, 1.0f);
-						else if (t < 2.0f) playerRend.color = new Color(1.0f, 0.0f, 0.0f, 2.0f - t);
-						else if (t < 2.5f) playerRend.color = Color.clear;
+						if (t < 1.0f) playerRend.sharedMaterial.SetColor("_Color", new Color(1.0f, 1.0f - t, 1.0f - t, 1.0f));
+						else if (t < 2.0f) playerRend.sharedMaterial.SetColor("_Color", new Color(1.0f, 0.0f, 0.0f, 2.0f - t));
+						else if (t < 2.5f) playerRend.sharedMaterial.SetColor("_Color", Color.clear);
 						// リスポーン
 						else
 						{
@@ -219,12 +219,12 @@ public class GameDirector : MonoBehaviour
 						t += Time.deltaTime;
 						float b = Mathf.Abs(Mathf.Repeat(t + flashT / 2.0f, flashT) - flashT / 2.0f) / flashT * 0.6f;
 						float g = b * 0.75f;
-						playerRend.color = new Color(1.0f, 1.0f - g, 1.0f - b, 1.0f);
+						playerRend.sharedMaterial.SetColor("_Color", new Color(1.0f, 1.0f - g, 1.0f - b, 1.0f));
 					}
 					else
 					{
 						t = 0.0f;
-						playerRend.color = Color.white;
+						playerRend.sharedMaterial.SetColor("_Color", Color.white);
 					}
 				}
 				// ゲームオーバー処理
@@ -329,7 +329,7 @@ public class GameDirector : MonoBehaviour
 	{
 		HP = HP_max;
 		stage.RespownAndResetObjectsPositions();
-		playerRend.color = Color.white;
+		playerRend.sharedMaterial.SetColor("_Color", Color.white);
 	}
 	/*
     /// <summary>
